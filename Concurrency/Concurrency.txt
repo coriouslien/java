@@ -1,0 +1,74 @@
+Java concurrency mechanisms allow multiple threads to execute simultaneously, improving 
+performance and responsiveness. However, this introduces challenges related to coordination 
+and visibility.
+🔒 Synchronization Primitives These mechanisms are used to control thread access to shared 
+resources and manage thread communication.
+1. synchronized Blocks and MethodsThe synchronized keyword is the most fundamental way to 
+achieve thread safety in Java by ensuring that only one thread can execute a block of code 
+or a method at a time. It uses an intrinsic lock (monitor lock) associated with an object.
+Mechanism: When a thread enters a synchronized block, it acquires the lock on the specified 
+object (or the class object for static methods). Once the block is exited, the lock is
+released. 
+Visibility: It guarantees that all variables modified inside the synchronized block are 
+visible to the next thread that acquires the same lock (happens-before relationship).
+Usage: Method Synchronization: public synchronized void increment() { count++; } 
+(locks the instance). Block Synchronization: synchronized (lockObject) { ... } 
+(locks a specific object).
+2. volatile KeywordThe volatile keyword guarantees that reads and writes to a variable are 
+performed directly to and from main memory, ensuring visibility across threads. 
+Mechanism: It prevents the CPU from caching the variable's value locally in a register 
+or private cache. Every read sees the latest write, and every write is immediately made 
+visible to other threads.
+Limitation: volatile only ensures visibility; it does not guarantee atomicity for compound 
+operations (e.g., i++, which is a read, modify, write operation). 
+For atomic operations, use java.util.concurrent.atomic classes or synchronized.
+3. Reentrant Lock Reentrant Lock (part of java.util.concurrent.locks) is a more flexible 
+and powerful alternative to the synchronized keyword. Mechanism: It offers the same mutual 
+exclusion but provides features like interruptible waiting (lockInterruptibly()), 
+timed waiting (tryLock(long timeout)), and fairness (first thread waiting gets the lock
+first). Reentrancy: A thread that owns the lock can reacquire it without blocking 
+(hence "reentrant"). Usage: Requires manual locking and unlocking, typically using a 
+try-finally block to ensure the lock is always released.
+4. Count Down Latch A synchronization aid that allows one or more threads to wait until a 
+set of operations being performed by other threads completes. Mechanism: It's initialized 
+with a count. Threads call await() to block until the count reaches zero. Other threads 
+call countDown() to decrement the count. Usage: Useful for starting an application only 
+after all necessary services have initialized, or for waiting for a collection of parallel 
+tasks to finish.
+5. Semaphore A synchronization aid that maintains a set of available permits. Threads must 
+acquire a permit to access a resource and release it when done. Mechanism: Used to control 
+access to a limited pool of resources. If the count is 1, a Semaphore acts like a binary 
+mutex. If the count is $N$, it allows up to $N$ threads to access the resource concurrently.
+Usage: Limiting the number of concurrent connections to a database or restricting access to 
+a limited number of physical devices.
+🚀 Asynchronous Task Management
+6. Completable Future Completable Future (Java 8+) is used for composing and managing 
+asynchronous tasks. It represents a result that may not yet be available and is a powerful 
+tool for reactive programming. Mechanism: It can be completed explicitly 
+(complete(T value)) or can be built using fluent methods (thenApply, thenAccept, allOf, 
+anyOf) to define a pipeline of asynchronous computations. It eliminates callback hell.
+Advantages: Non-blocking, highly efficient, and simplifies complex workflows where one task 
+depends on the completion or result of another.
+
+Concurrency Issues and Avoidance Strategies
+Issue                      Description                     Avoidance Strategy
+
+Race Condition             Occurs when the correctness     Use synchronized, ReentrantLock,
+                           of the program depends on the   or Atomic classes to ensure mutual
+                           unpredictable sequence or       exclusion over critical sections.
+                           timing of multiple threads 
+                           accessing shared data.
+
+Deadlock	                 Two or more threads are         Impose a strict, global ordering
+                           perpetually blocked, waiting    of locks: All threads must acquire
+                           for resources held by the       locks in the same sequence
+                           other, leading to a permanent   (e.g., Lock A before Lock B).
+                           halt in progress.                Use tryLock() with a timeout to back
+                                                            out of a deadlock attempt.
+
+Livelock	                 Threads continuously change      Introduce randomness or time-based
+                           their state in response to       backing off into the retry logic
+                           each other without making any    so threads do not repeatedly 
+                           progress (e.g., two people       attempt the same action simultaneously.
+                           politely trying to avoid each 
+                           other in a hallway).
