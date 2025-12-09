@@ -1,0 +1,32 @@
+Garbage Collection (GC) in Java is the process of automatically managing memory by identifying 
+and deleting objects that are no longer referenced by the running program. The Java Virtual 
+Machine (JVM) provides several sophisticated garbage collectors, each optimized for different 
+performance goals, primarily focusing on throughput (total work done) versus latency 
+(pauses, or "stop-the-world" time).
+
+🗑️ Types of Garbage Collectors in the JVM
+The main garbage collectors available in modern JVMs (Java 8+) are Parallel, CMS (legacy), G1, 
+and Z/Shenandoah (low latency).
+
+Collector	       JVM Flag	            Goal / Best For	          Advantages	        Disadvantages
+Parallel         -XX:+UseParallelGC   High-volume batch         High throughput     Long, noticeable
+(Throughput)	            	          processing; maximizing    (fastest total      "stop-the-world"
+                                      CPU utilization.		      cleanup).           (STW) pauses 
+                                                                                    during major
+                                                                                    collections.
+CMS (Concurrent  -XX:+UseConcMarkSweepGC
+Mark Sweep)                           Low-latency applications; Shortest STW 
+                                      minimizing long pauses    pauses for the
+                                      (Legacy in Java 9+).      old generation
+                                                                compared to 
+                                                                Parallel.
+
+
+
+
+
+
+
+Higher CPU overhead; risk of Concurrent Mode Failure (if garbage production outpaces collection); fragmentation.
+G1 (Garbage First)	-XX:+UseG1GC (Default in Java 9+)	Balanced latency and throughput; large heaps (4GB+).	Predictable pause times; performs compaction (prevents fragmentation).	Higher overhead than Parallel GC at lower heap sizes.
+ZGC / Shenandoah	-XX:+UseZGC / -XX:+UseShenandoahGC	Ultra-low latency (e.g., $ < 10 \text{ms}$ pauses); massive heaps (1TB+).	Highly concurrent; pauses are almost independent of heap size.	Higher CPU overhead; ZGC uses more memory (colored pointers).
