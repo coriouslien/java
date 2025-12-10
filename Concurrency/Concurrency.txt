@@ -72,3 +72,35 @@ Livelock	                 Threads continuously change      Introduce randomness 
                            progress (e.g., two people       attempt the same action simultaneously.
                            politely trying to avoid each 
                            other in a hallway).
+
+======================================================================
+
+Java's CompletableFuture class, introduced in Java 8, is a powerful tool for asynchronous 
+programming and handling the results of computations that might not be immediately 
+available. It extends the Future interface, offering significant enhancements for 
+composing and combining asynchronous tasks, handling exceptions, and reacting to 
+completion.
+Key functions and benefits of CompletableFuture:
+Asynchronous Execution: It allows tasks to be run in a separate thread, freeing up the 
+main thread to perform other operations. This is crucial for improving responsiveness 
+in applications, especially those involving I/O-bound operations like network requests
+or database access.
+Chaining and Composition: CompletableFuture enables the chaining of dependent operations. 
+You can define what should happen after a task completes, transform its result, or combine 
+it with the results of other CompletableFuture instances. Methods like thenApply, 
+thenCompose, thenCombine, and allOf facilitate these operations.
+Non-Blocking Operations: Unlike the traditional Future's get() method which blocks until 
+the result is available, CompletableFuture supports non-blocking operations. You can register callbacks that execute when a computation completes, allowing for more efficient resource 
+utilization.
+Exception Handling: It provides robust mechanisms for handling exceptions that occur 
+during asynchronous computations. Methods like exceptionally and handle allow you to 
+define how to react to errors and recover gracefully.
+Manual Completion: You can manually complete a CompletableFuture using complete(T value) 
+or completeExceptionally(Throwable ex), which is useful when the result of a computation 
+is determined outside of a traditional asynchronous task.
+Functional Programming Style: CompletableFuture leverages Java's functional programming 
+features, such as lambda expressions and method references, making the code more concise
+and readable for managing asynchronous workflows.
+In essence, CompletableFuture simplifies the development of concurrent and asynchronous
+applications by providing a flexible and expressive API for managing the lifecycle and 
+interactions of asynchronous computations.
