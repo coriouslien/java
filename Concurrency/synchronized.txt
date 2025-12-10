@@ -1,0 +1,23 @@
+The Java synchronized keyword is the fundamental mechanism for achieving thread safety by 
+enforcing mutual exclusion and guaranteeing memory visibility between threads.
+🔒 1. The synchronized Keyword The synchronized keyword uses an object's intrinsic lock 
+(or monitor lock) to protect shared data and critical sections of code. 
+A. Mutual Exclusion Only one thread can hold a lock at any given time. When a thread enters 
+a synchronized block or method, it must acquire the lock. If the lock is already held by 
+another thread, the new thread is blocked (waits) until the lock is released.
+B. Memory Visibility The synchronized mechanism ensures a happens-before relationship. 
+This means: When a thread releases a lock, all its writes to shared variables become visible 
+to other threads. When another thread acquires the same lock, it sees the latest written 
+values of those shared variables.
+C. Usage The keyword can be applied in two main ways: 
+Usage Type          Lock Acquired                      Description
+Instance Method	    The lock of the current object	   public synchronized void method() { ... }
+                    instance (this).	
+
+Static Method	      The lock of the Class object       public static synchronized void method() { ... }
+                    (ClassName.class).	
+
+Synchronized Block	The lock of the object             synchronized (lockObject) { ... } 
+                    specified in parentheses.          (Most flexible)
+
+
