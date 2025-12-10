@@ -1,0 +1,25 @@
+    import java.util.concurrent.locks.Lock;
+    import java.util.concurrent.locks.ReentrantLock;
+
+    class CounterWithLock {
+        private int count = 0;
+        private final Lock lock = new ReentrantLock();
+
+        public void increment() {
+            lock.lock(); // Acquire the lock
+            try {
+                count++;
+            } finally {
+                lock.unlock(); // Release the lock in a finally block
+            }
+        }
+
+        public int getCount() {
+            lock.lock();
+            try {
+                return count;
+            } finally {
+                lock.unlock();
+            }
+        }
+    }
