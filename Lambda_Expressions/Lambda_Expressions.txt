@@ -1,3 +1,84 @@
+Java lambda expressions, introduced in Java 8, provide a concise way to represent an anonymous
+function. They are used to implement functional interfaces, which are interfaces with a single
+abstract method. Lambdas enable a more functional programming style in Java, making code more 
+readable and expressive, especially when working with collections and streams.
+Syntax of a Lambda Expression:
+Code
+
+(parameter-list) -> { body }
+parameter-list: A comma-separated list of formal parameters. Their types can often be inferred by 
+the compiler. Parentheses can be omitted if there is only one parameter. No parameters are 
+represented by empty parentheses ().
+-> (Arrow token): Separates the parameters from the body.
+body: A single expression or a statement block. If it's a single expression, the result is 
+implicitly returned. If it's a statement block, it must be enclosed in curly braces {} and 
+explicitly use a return statement if a value needs to be returned.
+1. Lambda with no parameters:
+@FunctionalInterface
+interface MyGreeting {
+    void greet();
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        MyGreeting greeting = () -> System.out.println("Hello, World!");
+        greeting.greet();
+    }
+}
+
+2. Lambda with one parameter:
+@FunctionalInterface
+interface StringProcessor {
+    String process(String s);
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        StringProcessor upperCaseProcessor = s -> s.toUpperCase();
+        System.out.println(upperCaseProcessor.process("hello"));
+
+        StringProcessor reverseProcessor = s -> {
+            StringBuilder sb = new StringBuilder(s);
+            return sb.reverse().toString();
+        };
+        System.out.println(reverseProcessor.process("world"));
+    }
+}
+
+3. Lambda with multiple parameters:
+@FunctionalInterface
+interface MathOperation {
+    int operate(int a, int b);
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        MathOperation addition = (a, b) -> a + b;
+        System.out.println("Addition: " + addition.operate(5, 3));
+
+        MathOperation multiplication = (int a, int b) -> a * b; // Explicit types
+        System.out.println("Multiplication: " + multiplication.operate(5, 3));
+    }
+}
+
+4. Using Lambdas with Collections (forEach):
+import java.util.ArrayList;
+import java.util.List;
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        List<String> names = new ArrayList<>();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+
+        // Using lambda with forEach to print each name
+        names.forEach(name -> System.out.println("Name: " + name));
+    }
+}
+
+
+
 A lambda expression provides a concise way to implement a functional interface (an interface with
 exactly one abstract method). They allow you to treat functionality as a method argument or code 
 as data.
