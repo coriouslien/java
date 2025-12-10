@@ -12,10 +12,14 @@ public class CompletableFutureExample {
         System.out.println("Starting CompletableFuture demonstration...");
 
         // 1. supplyAsync: Run a task asynchronously and return a result
+        supplyAsync(Supplier<T> supplier): Creates a CompletableFuture that runs a 
+        Supplier asynchronously and returns its result.
+
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
             System.out.println("Task 1: Fetching data from Source A...");
             try {
-                TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(1, 3)); // Simulate delay
+                // Simulate delay
+                TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(1, 3)); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
