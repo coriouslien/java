@@ -1,0 +1,14 @@
+A lambda expression provides a concise way to implement a functional interface (an interface with
+exactly one abstract method). They allow you to treat functionality as a method argument or code 
+as data.
+
+Syntax: (parameters) -> { body }
+
+Optional<T> (Java 8)
+Optional is a container object used to represent a value that may or may not be present. Its 
+primary goal is to address the millions of dollars lost to NullPointerException by forcing 
+the programmer to explicitly think about the absence of a value.
+
+Usage: Instead of returning null, a method returns an Optional. The caller must then use
+methods like isPresent(), orElse(), or map() to safely handle the potential absence of a
+value.
