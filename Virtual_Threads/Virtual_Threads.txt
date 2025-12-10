@@ -1,3 +1,17 @@
+Virtual Threads, introduced as a stable feature in Java 21 as part of Project Loom, are lightweight, user-mode threads managed by the Java Virtual Machine (JVM). They differ significantly from traditional platform threads (OS threads) in their resource consumption and scalability.
+Differences from Traditional Platform Threads:
+Resource Consumption: Platform threads are directly mapped to operating system (OS) threads, which are relatively heavy, requiring significant memory for their stack and context. Virtual threads, in contrast, are managed by the JVM, multiplexing many virtual threads onto a smaller number of platform threads. This makes them significantly lighter and allows for the creation of millions of virtual threads with minimal overhead.
+Scalability: Due to their lightweight nature, virtual threads enable Java applications to achieve 
+much higher concurrency levels than platform threads. This is particularly beneficial for 
+I/O-bound applications, where threads spend a lot of time waiting for external resources.
+Scheduling: The JVM handles the scheduling of virtual threads, parking them when they block and
+unparking them when they are ready to run, without involving the OS scheduler. This allows 
+for more efficient resource utilization.
+Programming Model: Virtual threads retain the familiar Thread API, allowing developers to 
+write blocking code in a straightforward, imperative style without needing to adopt complex
+asynchronous programming models like futures or reactive programming for high concurrency.
+
+
 New Concurrency Utilities: Virtual Threads (Java 21)
 Java 21 introduced Virtual Threads (Project Loom), a groundbreaking change to Java's concurrency 
 model. They are lightweight threads implemented entirely within the JVM, designed to 
