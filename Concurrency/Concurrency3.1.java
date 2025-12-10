@@ -12,8 +12,8 @@ public class CompletableFutureExample {
         System.out.println("Starting CompletableFuture demonstration...");
 
         // 1. supplyAsync: Run a task asynchronously and return a result
-        supplyAsync(Supplier<T> supplier): Creates a CompletableFuture that runs a 
-        Supplier asynchronously and returns its result.
+        // supplyAsync(Supplier<T> supplier): Creates a CompletableFuture that runs a 
+        // Supplier asynchronously and returns its result.
 
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
             System.out.println("Task 1: Fetching data from Source A...");
@@ -27,6 +27,9 @@ public class CompletableFutureExample {
         });
 
         // 2. thenApply: Transform the result of a CompletableFuture
+        // thenApply(Function<? super T, ? extends U> fn): Transforms the result of the 
+        // current CompletableFuture with a given function, returning a new CompletableFuture 
+        // with the transformed result.
         CompletableFuture<String> future2 = future1.thenApply(resultA -> {
             System.out.println("Task 2: Processing " + resultA);
             return resultA.toUpperCase();
