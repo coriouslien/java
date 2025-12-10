@@ -1,0 +1,16 @@
+In Java, an unchecked exception is a type of exception that does not need to be declared in a 
+method's throws clause or explicitly caught in a try-catch block for the code to compile. 
+These exceptions are subclasses of RuntimeException or Error.
+Unchecked exceptions typically represent programming errors or unexpected conditions that are 
+not easily recoverable programmatically. They are often indicative of a bug in the code that needs 
+to be fixed, rather than an anticipated error that should be handled at runtime.
+
+Common examples of unchecked exceptions include:
+NullPointerException: Occurs when attempting to use a null reference as if it were an object.
+ArrayIndexOutOfBoundsException: Occurs when trying to access an array element at an invalid index.
+ArithmeticException: Occurs in cases like division by zero.
+ClassCastException: Occurs when attempting to cast an object to a type it is not compatible with.
+While you are not forced to handle unchecked exceptions, you can still catch them using try-catch
+blocks if necessary, for example, to log the error or perform some cleanup before the program
+terminates. However, the general recommendation is to fix the underlying programming error that 
+leads to an unchecked exception rather than simply catching it.
