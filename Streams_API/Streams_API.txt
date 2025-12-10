@@ -1,0 +1,38 @@
+The Java Streams API, introduced in Java 8, provides a powerful and functional way to process
+collections of data. It enables you to perform complex data manipulation operations in a 
+declarative and concise manner, promoting a more readable and maintainable codebase.
+
+Key Concepts of Java Streams:
+Source: A stream is typically created from a data source like a Collection, Array, I/O channel, 
+or a generator function.
+Intermediate Operations: These operations transform a stream into another stream. They are lazy,
+meaning they are not executed until a terminal operation is invoked. Examples include filter(), 
+map(), sorted(), distinct(), and flatMap().
+Terminal Operations: These operations produce a result or a side-effect, consuming the stream and
+marking it as closed. They are eager, triggering the execution of all preceding intermediate
+operations. Examples include forEach(), collect(), reduce(), count(), min(), max(), anyMatch(),
+allMatch(), and findFirst().
+Immutability: Streams do not modify the original data source. Instead, they produce new streams 
+or results based on the transformations.
+Functional Programming: Streams encourage a functional programming style, often used with 
+lambda expressions and method references for concise and expressive code.
+
+Parallel Processing: Streams can be easily converted to parallel streams (parallelStream()), 
+allowing for efficient processing on multi-core processors.
+
+
+The Streams API provides a powerful, declarative way to process sequences of elements (like
+collections). A stream is not a data structure; it's a pipeline for processing data.
+
+Stream Operations
+Stream operations are divided into two main categories:
+
+Intermediate Operations: These operations transform the stream and are lazy. They return a new 
+stream and allow for chaining. Examples: filter(), map(), sorted(), distinct().
+
+Terminal Operations: These operations produce a result or a side effect and close the stream. 
+Once a terminal operation is called, the pipeline executes. Examples: collect(), forEach(), 
+reduce(), count(), max().
+
+Parallel Streams
+By calling .parallelStream() instead of .stream() on a collection, you enable the JVM to process the data concurrently using the default Fork/Join common pool. This is useful for large datasets where the order of processing is not crucial, and the operations are CPU-intensive.
