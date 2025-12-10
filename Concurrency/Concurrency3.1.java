@@ -36,7 +36,11 @@ public class CompletableFutureExample {
         });
 
         // 3. thenCompose: Chain dependent CompletableFutures
-        CompletableFuture<String> future3 = future2.thenCompose(processedA -> CompletableFuture.supplyAsync(() -> {
+        // thenCompose(Function<? super T, ? extends CompletionStage<U>> fn): Chains 
+        // two CompletableFutures where the second CompletableFuture depends on the result 
+        // of the first. The function passed to thenCompose returns a new CompletionStage.
+        CompletableFuture<String> future3 = 
+            future2.thenCompose(processedA -> CompletableFuture.supplyAsync(() -> {
             System.out.println("Task 3: Fetching related data based on " + processedA);
             try {
                 TimeUnit.SECONDS.sleep(ThreadLocalRandom.current().nextInt(1, 3));
@@ -47,6 +51,10 @@ public class CompletableFutureExample {
         }));
 
         // 4. thenCombine: Combine results of two independent CompletableFutures
+        // thenCombine(
+        // CompletionStage<? extends U> other, BiFunction<? super T, ? super U, ? extends V> fn): 
+        // Combines the results of two independent CompletableFutures using a BiFunction, 
+        // returning a new CompletableFuture with the combined result.
         CompletableFuture<String> future4 = CompletableFuture.supplyAsync(() -> {
             System.out.println("Task 4: Fetching data from Source C...");
             try {
@@ -61,6 +69,8 @@ public class CompletableFutureExample {
         });
 
         // 5. exceptionally: Handle exceptions
+        (Function<Throwable, ? extends T> fn) explain: 
+        exceptionally(Function<Throwable, ? extends T> fn): Provides a way to handle exceptions that occur during the execution of a CompletableFuture. If an exception occurs, the provided function is executed, and its result becomes the result of the CompletableFuture.
         CompletableFuture<String> futureWithError = CompletableFuture.supplyAsync(() -> {
             System.out.println("Task with Error: Simulating an error...");
             if (true) { // Always throws for demonstration
