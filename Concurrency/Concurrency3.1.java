@@ -69,8 +69,11 @@ public class CompletableFutureExample {
         });
 
         // 5. exceptionally: Handle exceptions
-        (Function<Throwable, ? extends T> fn) explain: 
-        exceptionally(Function<Throwable, ? extends T> fn): Provides a way to handle exceptions that occur during the execution of a CompletableFuture. If an exception occurs, the provided function is executed, and its result becomes the result of the CompletableFuture.
+        // (Function<Throwable, ? extends T> fn) explain: see the Concurrency.txt
+        // exceptionally(Function<Throwable, ? extends T> fn): Provides a way to handle exceptions 
+        // that occur during the execution of a CompletableFuture. If an exception occurs, 
+        // the provided function is executed, and its result becomes the result of the 
+        // CompletableFuture.
         CompletableFuture<String> futureWithError = CompletableFuture.supplyAsync(() -> {
             System.out.println("Task with Error: Simulating an error...");
             if (true) { // Always throws for demonstration
@@ -83,6 +86,10 @@ public class CompletableFutureExample {
         });
 
         // 6. allOf: Wait for multiple CompletableFutures to complete
+        // allOf(CompletableFuture<?>... cfs): Returns a new CompletableFuture that is completed 
+        // when all of the given CompletableFutures are completed. It is useful for waiting for 
+        // multiple independent asynchronous operations to finish.
+
         CompletableFuture<Void> allOfFutures = CompletableFuture.allOf(future4, futureWithError);
 
         // Wait for all futures to complete and print results
@@ -93,6 +100,8 @@ public class CompletableFutureExample {
         System.out.println("Future with Error Result: " + futureWithError.get());
 
         // 7. runAsync: Execute a Runnable asynchronously (no return value)
+        // runAsync(Runnable runnable): Creates a CompletableFuture that runs a Runnable 
+        // asynchronously without returning any result.
         CompletableFuture<Void> runAsyncFuture = CompletableFuture.runAsync(() -> {
             System.out.println("Task 6: Running a background task without return value...");
             try {
@@ -102,7 +111,8 @@ public class CompletableFutureExample {
             }
             System.out.println("Task 6 completed.");
         });
-
+        join() and get(): Both methods wait for the CompletableFuture to complete. 
+        join() throws an unchecked CompletionException if the computation completes exceptionally, while get() throws checked InterruptedException and ExecutionException. join() is often preferred in scenarios where you expect the operation to succeed or want to handle exceptions via exceptionally().
         runAsyncFuture.join(); // Wait for it to complete
 
         System.out.println("CompletableFuture demonstration finished.");
