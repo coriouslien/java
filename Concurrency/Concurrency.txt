@@ -90,7 +90,8 @@ You can define what should happen after a task completes, transform its result, 
 it with the results of other CompletableFuture instances. Methods like thenApply, 
 thenCompose, thenCombine, and allOf facilitate these operations.
 Non-Blocking Operations: Unlike the traditional Future's get() method which blocks until 
-the result is available, CompletableFuture supports non-blocking operations. You can register callbacks that execute when a computation completes, allowing for more efficient resource 
+the result is available, CompletableFuture supports non-blocking operations. You can register
+callbacks that execute when a computation completes, allowing for more efficient resource 
 utilization.
 Exception Handling: It provides robust mechanisms for handling exceptions that occur 
 during asynchronous computations. Methods like exceptionally and handle allow you to 
@@ -104,3 +105,45 @@ and readable for managing asynchronous workflows.
 In essence, CompletableFuture simplifies the development of concurrent and asynchronous
 applications by providing a flexible and expressive API for managing the lifecycle and 
 interactions of asynchronous computations.
+
+==============================================================================
+Function<Throwable, ? extends T>: This is a built-in Java functional interface that represents 
+a function taking one argument and producing one result.
+Throwable: This specifies the input type of the function fn. Because Throwable is the superclass 
+of all exceptions and errors in Java, the function can process any kind of issue that might arise
+(e.g., IOException, RuntimeException, Error).
+? extends T: This defines the return type of the function fn. It indicates that the function 
+must return a value of type T or a subclass of T. The extends wildcard offers flexibility, 
+allowing the recovery logic to return a compatible subtype of the expected final result type. 
+The Purpose in Context
+This pattern is most famously used in asynchronous programming APIs like Java's CompletableFuture
+(specifically its exceptionally method). 
+In this context, the exceptionally essentially acts as a "catch" block for asynchronous 
+operations:
+The primary code runs and might complete successfully (producing a T result) or 
+exceptionally (throwing a Throwable).
+If it succeeds, the fn parameter is ignored.
+If it fails, the exceptionally calls the provided fn function, passing the caught Throwable as 
+an argument.
+The fn function then executes its logic, which typically involves:
+Logging the error.
+Checking the type of the exception and handling it specifically.
+Returning a default or fallback value to prevent the exception from propagating further up 
+the call chain, allowing the program flow to continue normally. 
+Example using CompletableFuture.exceptionally():
+java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+    // Some operation that might fail
+    if (Math.random() < 0.5) {
+        throw new RuntimeException("Something went wrong");
+    }
+    return "Success";
+});
+
+// The parameter below is the Function<Throwable, ? extends T> (where T is String)
+CompletableFuture<String> result = future.exceptionally(ex -> {
+    System.err.println("Error: " + ex.getMessage());
+    return "Fallback Value"; // Return a default value to recover
+});
+
+// The result will either be "Success" or "Fallback Value"
