@@ -1,3 +1,31 @@
+The synchronized keyword in Java is a fundamental mechanism for achieving thread safety by 
+controlling access to shared resources. It ensures that only one thread can execute a critical 
+section of code at a time, preventing race conditions and data corruption.
+How synchronized Works:
+When a thread enters a synchronized block or method, it acquires a lock (monitor) associated 
+with the object or class. Other threads attempting to enter the same synchronized block or method 
+on the same object (or class, for static methods) will be blocked until the first thread releases 
+the lock.
+Limitations of synchronized:
+Lack of Flexibility: synchronized provides a basic, all-or-nothing locking mechanism. It doesn't 
+offer fine-grained control over lock acquisition and release.
+No Timeout Mechanism: A thread waiting for a synchronized lock can be blocked indefinitely if the 
+lock-holding thread never releases it.
+No tryLock() Capability: There's no built-in way to attempt to acquire a lock without blocking, 
+which can be useful in scenarios where you want to perform alternative actions if the lock is
+unavailable.
+Single Condition Variable: synchronized is coupled with wait(), notify(), and notifyAll() methods 
+of Object, which only provide a single waiting condition for a given object.
+Alternative Approaches to Thread Safety:
+Lock Interface (e.g., ReentrantLock):
+The java.util.concurrent.locks.Lock interface offers more flexible and advanced locking mechanisms
+than synchronized. 
+ReentrantLock allows for:
+Explicit lock acquisition (lock()) and release (unlock()).
+tryLock() for non-blocking lock attempts.
+tryLock(long timeout, TimeUnit unit) for timed lock attempts.
+Multiple Condition objects for finer-grained waiting and notification.
+
 The Java synchronized keyword is the fundamental mechanism for achieving thread safety by 
 enforcing mutual exclusion and guaranteeing memory visibility between threads.
 🔒 1. The synchronized Keyword The synchronized keyword uses an object's intrinsic lock 
