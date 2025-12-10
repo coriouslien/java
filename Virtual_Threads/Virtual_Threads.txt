@@ -1,0 +1,14 @@
+New Concurrency Utilities: Virtual Threads (Java 21)
+Java 21 introduced Virtual Threads (Project Loom), a groundbreaking change to Java's concurrency 
+model. They are lightweight threads implemented entirely within the JVM, designed to 
+dramatically reduce the cost and complexity of high-throughput concurrent applications.
+
+Platform Threads (Traditional): Heavyweight, OS-managed threads. Limited in number 
+(often thousands max) due to memory and context-switching overhead.
+
+Virtual Threads (New): Extremely lightweight threads that are scheduled by the JVM onto a 
+small pool of carrier platform threads. You can create millions of them.
+
+Benefit: Virtual Threads are cheap to create and block when waiting for I/O (like network 
+or database calls), freeing up the underlying carrier thread to serve other virtual threads. 
+This enables massive scalability for server applications with high concurrency demands.
