@@ -9,6 +9,25 @@ Platform Threads (Traditional): Heavyweight, OS-managed threads. Limited in numb
 Virtual Threads (New): Extremely lightweight threads that are scheduled by the JVM onto a 
 small pool of carrier platform threads. You can create millions of them.
 
+===============================================================================
+
+In the Java code snippet try (var executor = Executors.newVirtualThreadPerTaskExecutor()), 
+var is a reserved type name (often referred to as a keyword in common parlance) introduced in 
+Java 10. It is used for local variable type inference.
+Here's a breakdown:
+var as a Reserved Type Name: While not a traditional keyword like public or class, var holds a 
+special meaning within the Java language, making it a reserved identifier that cannot be used 
+for variable names or other identifiers.
+Local Variable Type Inference: When var is used to declare a local variable, the Java compiler
+automatically infers the variable's type based on the type of the initializer expression on the 
+right-hand side of the assignment. In this case, Executors.newVirtualThreadPerTaskExecutor() 
+returns an ExecutorService, so the compiler infers that executor will be of type ExecutorService.
+Benefits: Using var can lead to more concise and readable code, especially when dealing with long 
+or complex type names. It reduces redundancy by eliminating the need to explicitly declare the 
+type when it can be easily inferred by the compiler.
+Context: var is only applicable to local variables and cannot be used for fields, method 
+parameters, or return types.
+
 Benefit: Virtual Threads are cheap to create and block when waiting for I/O (like network 
 or database calls), freeing up the underlying carrier thread to serve other virtual threads. 
 This enables massive scalability for server applications with high concurrency demands.
