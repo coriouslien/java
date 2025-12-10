@@ -111,8 +111,11 @@ public class CompletableFutureExample {
             }
             System.out.println("Task 6 completed.");
         });
-        join() and get(): Both methods wait for the CompletableFuture to complete. 
-        join() throws an unchecked CompletionException if the computation completes exceptionally, while get() throws checked InterruptedException and ExecutionException. join() is often preferred in scenarios where you expect the operation to succeed or want to handle exceptions via exceptionally().
+        // join() and get(): Both methods wait for the CompletableFuture to complete. 
+        // join() throws an unchecked CompletionException if the computation completes exceptionally, 
+        // while get() throws checked InterruptedException and ExecutionException. join() is often 
+        // preferred in scenarios where you expect the operation to succeed or want to handle 
+        // exceptions via exceptionally().
         runAsyncFuture.join(); // Wait for it to complete
 
         System.out.println("CompletableFuture demonstration finished.");
