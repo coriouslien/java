@@ -17,7 +17,7 @@ Below are code examples illustrating JMM concepts.
 Example 1: The Visibility Problem
 This example demonstrates how a change to a shared variable by one thread might not be visible 
 to another without proper synchronization, potentially leading to issues like infinite loops. 
-For a full code example, please refer to CodeSignal. 
+For a full code example. 
 Explanation: Without proper synchronization, a worker thread might not see changes made to a 
 shared variable by another thread, potentially causing unexpected behavior like an infinite loop. 
 Example 2: Solving Visibility with volatile
