@@ -1,3 +1,6 @@
+The fundamental difference between the == operator and the .equals() method in Java lies in 
+what they are comparing: references versus content. 
+
 The core difference between the == operator and the .equals() method in Java. This distinction is
 fundamental to understanding how objects are compared in the language.
 Here is a detailed explanation and complete code examples illustrating these concepts:
