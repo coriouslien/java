@@ -1,0 +1,40 @@
+The JMM defines how threads interact with memory and ensures visibility of changes made by one 
+thread to another. It involves concepts like main memory and working memory for each thread, and 
+keywords like volatile and synchronized help enforce visibility and ordering.
+
+
+
+The Java Memory Model (JMM) defines the rules regarding how threads interact with memory. It 
+specifies two crucial things: how and when changes made by one thread become visible to another 
+thread, and how synchronization mechanisms affect memory ordering. The JMM exists primarily 
+to bridge the gap between Java's high-level language guarantees and the complexities of modern 
+multi-core hardware and compiler optimizations.
+
+🧠 1. The Core Problem: Caching and Reordering Modern systems achieve performance by using 
+three main techniques that violate sequential code execution: Processor Caches: Each CPU core 
+has its own cache (L1, L2, L3). When a thread writes to a variable, the write might only go 
+to the local CPU cache, not main memory. Other threads on different cores may continue 
+reading stale values from their caches. Compiler Optimization: The JVM and JIT compiler 
+may reorder instructions to improve efficiency, as long as the code appears correct to a single 
+thread (the as-if-serial guarantee). Hardware Reordering: The CPU hardware itself can reorder 
+memory writes for performance.The JMM exists to prevent these optimizations from breaking 
+multi-threaded logic.
+
+🔒 2. Key JMM Concepts A. Happens-Before Relationship (The Core Guarantee)The "happens-before"
+relationship is the JMM's central concept. If action $A$ happens-before action $B$, the JMM 
+guarantees that: Visibility: The effects of action $A$ are visible to action $B$.Ordering: 
+Action $A$ is executed before action $B$. If there is no happens-before relationship between two
+actions, the JVM is free to reorder them, leading to a race condition. B. Happens-Before Rules
+(Enforcing Visibility) The JMM defines several explicit rules that establish a happens-before
+relationship:
+
+Mechanism	          Action A (Happens Before)	               Action B (Is Visible To)
+Volatile            A write to a volatile variable.          A subsequent read of that same 
+                                                             volatile variable.
+
+Synchronization     An unlock of a monitor (releasing        A subsequent lock of that same monitor.
+                    a synchronized block).
+
+Thread Start/Join   Calling t.start().                       The first action in thread $t$.
+
+Thread Join         All actions in thread $t$.               The successful return from t.join().
