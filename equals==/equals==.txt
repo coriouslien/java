@@ -1,6 +1,16 @@
 The fundamental difference between the == operator and the .equals() method in Java lies in 
 what they are comparing: references versus content. 
 
+1. The == Operator (Reference Comparison) 
+The == operator compares the memory addresses of the objects being referenced. It returns true 
+only if both variables point to the exact same object instance in memory. 
+
+2. The .equals() Method (Content Comparison)
+The .equals() method is designed to compare the actual values or contents of two objects. 
+Default Behavior (Not Overridden)
+By default, the equals() method inherited from the base Object class simply performs the exact 
+same reference comparison as ==. 
+
 The core difference between the == operator and the .equals() method in Java. This distinction is
 fundamental to understanding how objects are compared in the language.
 Here is a detailed explanation and complete code examples illustrating these concepts:
