@@ -9,6 +9,14 @@ language feel more object-oriented in practice.
 Below are complete examples illustrating the difference between a primitive type and an object
 (specifically a wrapper class object).
 
+Key Differences Illustrated by the Code:
+Methods: You cannot use the dot operator (.) on primitiveInt to access methods like toString(). 
+You can on objectInt.
+Nullability: Integer can be assigned the value null, representing the absence of an object. The
+primitive int cannot; it must always have a value, even if it's the default 0.
+Behavior: Primitives store raw values efficiently in the stack, while objects are full instances 
+of a class, stored in the heap, possessing state and behavior (methods). 
+
 
 The existence of primitive data types is the primary reason Java is considered an 
 object-oriented language with procedural elements, rather than a purely or "100%" 
