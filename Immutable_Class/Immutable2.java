@@ -1,3 +1,6 @@
+// A Simple Immutable Class (with immutable fields)
+// This example uses only immutable types (String, int). 
+    
 public final class StudentRecord {
 
     private final int id;
