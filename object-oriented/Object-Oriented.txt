@@ -1,0 +1,37 @@
+The existence of primitive data types is the primary reason Java is considered an object-oriented language with procedural elements, rather than a purely or "100%" object-oriented language.
+
+🚫 The Barrier: Java Primitive Data Types
+A purely object-oriented (OO) language, like Smalltalk, treats everything as an object, inheriting from a base class and supporting polymorphism. Java fails this test because of its eight primitive types:
+
+char
+
+byte
+
+float
+
+int
+
+boolean
+
+short
+
+double
+
+long
+
+Why Primitives Break Pure OO
+No Inheritance: Primitives do not inherit from java.lang.Object (the root of all Java classes).
+
+No Polymorphism: You cannot use a primitive type to reference an object of a different type, nor can you override behavior.
+
+No Methods: Primitives do not have methods (e.g., you cannot call 5.toString() in Java).
+
+Stored by Value: Primitives are stored directly on the stack (or within an object's memory block),
+whereas objects are stored on the heap and accessed via references.
+
+💻 Code Examples Demonstrating the Difference
+The following examples highlight the functional and conceptual differences between the primitive 
+int and its corresponding wrapper object, Integer.
+
+Example 1: Methods and Nullability
+Objects support methods and can be null; primitives do not.
