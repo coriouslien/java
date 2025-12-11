@@ -1,3 +1,17 @@
+The synchronized keyword in Java provides a built-in mechanism for achieving thread safety by 
+ensuring that only one thread can execute a critical section of code at a time. It uses 
+implicit monitors or locks associated with objects. 
+Here is an explanation of the keyword, its limitations, and alternative approaches with complete code examples.
+1. The synchronized Keyword
+The synchronized keyword can be applied to instance methods, static methods, or code blocks. It works by acquiring an intrinsic lock (monitor lock) for an object or a class before executing the guarded code. This mechanism guarantees both atomicity (the operation completes entirely or not at all) and visibility (changes made by one thread are visible to others once the lock is released). 
+How it works:
+Instance Method: Locks on the specific instance (this) of the class.
+Static Method: Locks on the Class object itself, protecting all static methods using that lock.
+Code Block: Locks on a specified object reference (synchronized (objectReference) { ... }). This is more flexible as it allows locking on different objects to protect different data fields within the same class. 
+Complete Example Code (Synchronized Counter)
+This example demonstrates how synchronized is used to prevent race conditions when multiple threads increment a shared counter. 
+
+
 The synchronized keyword in Java is a fundamental mechanism for achieving thread safety by 
 controlling access to shared resources. It ensures that only one thread can execute a critical 
 section of code at a time, preventing race conditions and data corruption.
