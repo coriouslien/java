@@ -1,6 +1,6 @@
 // Code Examples Demonstrating the Difference
-// The following examples highlight the functional and conceptual differences between the primitive int 
-// and its corresponding wrapper object, Integer.
+// The following examples highlight the functional and conceptual differences between the 
+// primitive int and its corresponding wrapper object, Integer.
 
 // Example 1: Methods and Nullability
 // Objects support methods and can be null; primitives do not.
