@@ -29,9 +29,8 @@ No Methods: Primitives do not have methods (e.g., you cannot call 5.toString() i
 Stored by Value: Primitives are stored directly on the stack (or within an object's memory block),
 whereas objects are stored on the heap and accessed via references.
 
-💻 Code Examples Demonstrating the Difference
-The following examples highlight the functional and conceptual differences between the primitive 
-int and its corresponding wrapper object, Integer.
+Autoboxing and Unboxing (Java's Bridge)
+To make programming easier, Java introduced autoboxing (automatically converting a primitive 
+to its wrapper object) and unboxing (converting a wrapper object back to its primitive).
 
-Example 1: Methods and Nullability
-Objects support methods and can be null; primitives do not.
+
