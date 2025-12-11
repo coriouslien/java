@@ -1,7 +1,23 @@
-The existence of primitive data types is the primary reason Java is considered an object-oriented language with procedural elements, rather than a purely or "100%" object-oriented language.
+Java is not considered a purely object-oriented language because it incorporates eight primitive 
+data types (boolean, byte, char, short, int, long, float, and double) that are not objects. 
+In a purely object-oriented language, every data type would be an object capable of polymorphism,
+inheritance, and having associated methods. Java's primitives lack these object-oriented features. 
+To mitigate this, Java provides wrapper classes for each primitive type (e.g., Integer for int,
+Boolean for boolean), which are full objects. Java also introduced autoboxing and unboxing to
+automatically convert between primitives and their corresponding wrapper objects, making the 
+language feel more object-oriented in practice. 
+Below are complete examples illustrating the difference between a primitive type and an object
+(specifically a wrapper class object).
+
+
+The existence of primitive data types is the primary reason Java is considered an 
+object-oriented language with procedural elements, rather than a purely or "100%" 
+object-oriented language.
 
 🚫 The Barrier: Java Primitive Data Types
-A purely object-oriented (OO) language, like Smalltalk, treats everything as an object, inheriting from a base class and supporting polymorphism. Java fails this test because of its eight primitive types:
+A purely object-oriented (OO) language, like Smalltalk, treats everything as an object, 
+inheriting from a base class and supporting polymorphism. Java fails this test because of its 
+eight primitive types:
 
 char
 
