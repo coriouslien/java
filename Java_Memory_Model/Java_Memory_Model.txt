@@ -66,3 +66,27 @@ Synchronization     An unlock of a monitor (releasing        A subsequent lock o
 Thread Start/Join   Calling t.start().                       The first action in thread $t$.
 
 Thread Join         All actions in thread $t$.               The successful return from t.join().
+
+
+=====================================================================================
+A comprehensive example demonstrating Java Memory Model visibility problems and their solutions
+Problems Demonstrated:
+
+Visibility Problem: A thread may never see changes made by another thread due to CPU caching (the background thread might run forever)
+Lost Updates: Multiple threads incrementing a counter without synchronization leads to lost updates (race condition)
+Instruction Reordering: The JVM/CPU can reorder instructions, leading to unexpected results
+
+Solutions Provided:
+
+volatile keyword: Ensures visibility of changes across threads
+synchronized methods: Provides both atomicity and visibility
+AtomicInteger: Lock-free atomic operations for better performance
+
+Key Takeaways:
+
+Without volatile or synchronization, changes made in one thread may never be visible to others
+count++ is NOT atomic - it's three operations: read, increment, write
+Use volatile for simple flags that are only read/written
+Use synchronized or AtomicInteger when you need compound operations to be atomic
+
+Run this code multiple times to see the non-deterministic nature of concurrency bugs - sometimes the problems manifest, sometimes they don't, which makes them particularly dangerous in production code.
