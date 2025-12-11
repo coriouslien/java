@@ -1,0 +1,40 @@
+An immutable class is a class whose instances cannot be modified after they are created. 
+The String class is a classic example. To create an immutable class, you must ensure all fields 
+are final and private, and that no methods allow modification of the object's state.
+
+
+
+
+
+An immutable class in Java is a class whose instances cannot be modified after they are created. 
+Once an object is constructed, its internal state remains fixed throughout its lifetime.
+
+This design pattern is highly desirable in programming, especially in concurrent environments, 
+because it simplifies thread safety and improves code predictability.
+
+🔒 Key Rules for Creating an Immutable Class
+To ensure a class is truly immutable, it must adhere to the following five rules:
+
+Declare the class as final: This prevents the class from being extended (subclassed). 
+Subclassing could allow a mutable child class to violate the immutability contract.
+
+Declare all fields as private and final:
+
+private restricts direct external access.
+
+final ensures the field's value can only be initialized once (either in the declaration or the
+constructor).
+
+Do not provide setter methods: This is the direct way to ensure the object's state cannot be 
+changed after construction.
+
+Make the constructor the only way to initialize the state: All necessary state must be provided 
+when the object is created.
+
+Defensive Copying of Mutable Objects: If the class holds references to mutable objects (like Date 
+or a List), you must:
+
+In the constructor: Create a deep copy of the passed-in mutable object and store the copy.
+
+In getter methods: Return a deep copy of the mutable object, not the original reference. 
+(This prevents external code from modifying the internal state via the returned reference.)
