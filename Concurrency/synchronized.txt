@@ -1,15 +1,50 @@
 The synchronized keyword in Java provides a built-in mechanism for achieving thread safety by 
 ensuring that only one thread can execute a critical section of code at a time. It uses 
 implicit monitors or locks associated with objects. 
-Here is an explanation of the keyword, its limitations, and alternative approaches with complete code examples.
+Here is an explanation of the keyword, its limitations, and alternative approaches with complete 
+code examples.
 1. The synchronized Keyword
-The synchronized keyword can be applied to instance methods, static methods, or code blocks. It works by acquiring an intrinsic lock (monitor lock) for an object or a class before executing the guarded code. This mechanism guarantees both atomicity (the operation completes entirely or not at all) and visibility (changes made by one thread are visible to others once the lock is released). 
+The synchronized keyword can be applied to instance methods, static methods, or code blocks. 
+It works by acquiring an intrinsic lock (monitor lock) for an object or a class before executing 
+the guarded code. This mechanism guarantees both atomicity (the operation completes entirely or 
+not at all) and visibility (changes made by one thread are visible to others once the lock 
+is released). 
 How it works:
 Instance Method: Locks on the specific instance (this) of the class.
 Static Method: Locks on the Class object itself, protecting all static methods using that lock.
-Code Block: Locks on a specified object reference (synchronized (objectReference) { ... }). This is more flexible as it allows locking on different objects to protect different data fields within the same class. 
+Code Block: Locks on a specified object reference (synchronized (objectReference) { ... }). 
+This is more flexible as it allows locking on different objects to protect different data 
+fields within the same class. 
 Complete Example Code (Synchronized Counter)
-This example demonstrates how synchronized is used to prevent race conditions when multiple threads increment a shared counter. 
+This example demonstrates how synchronized is used to prevent race conditions when multiple 
+threads increment a shared counter. 
+
+2. Limitations of synchronized
+While simple and effective for basic use cases, synchronized has several limitations in more 
+complex concurrency scenarios: 
+Cannot Interrupt a Waiting Thread: A thread waiting for a synchronized lock cannot be interrupted 
+or timed out; it must wait indefinitely until the lock is available.
+Lack of Flexibility/Fairness Control: synchronized locks are non-fair by default (threads are 
+granted access randomly, not based on who waited longest). You have no control over this.
+Cannot Try to Acquire a Lock: You cannot conditionally acquire a lock (e.g., "try to lock now, 
+but if it's held, do something else"); synchronized blocks until the lock is acquired.
+Single Condition Variable Support: It is tied to a single intrinsic wait(), notify(), and 
+notifyAll() mechanism, which can be inefficient if multiple independent conditions need to be managed.
+Potential for Deadlocks: Like any locking mechanism, improper use can lead to deadlocks, which 
+can be hard to debug. 
+3. Alternative Approaches to Achieve Thread Safety
+Java's java.util.concurrent package provides robust and flexible alternatives that address the
+limitations of synchronized. 
+A. The Lock Interface (e.g., ReentrantLock)
+The Lock interface offers more advanced locking capabilities than synchronized. The most common
+implementation is ReentrantLock. It allows for: 
+Interruptible Locks: Using lockInterruptibly() allows a waiting thread to be interrupted.
+Timed Lock Attempts: Using tryLock(long timeout, TimeUnit unit) allows attempting to acquire the 
+lock within a certain time frame.
+Fairness Policy: You can instantiate a ReentrantLock as a fair lock (new ReentrantLock(true)).
+Multiple Conditions: The ability to create multiple Condition objects associated with a single Lock,
+offering fine-grained control over thread waiting/notification. 
+
 
 
 The synchronized keyword in Java is a fundamental mechanism for achieving thread safety by 
