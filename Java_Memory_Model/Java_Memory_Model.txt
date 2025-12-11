@@ -2,7 +2,35 @@ The JMM defines how threads interact with memory and ensures visibility of chang
 thread to another. It involves concepts like main memory and working memory for each thread, and 
 keywords like volatile and synchronized help enforce visibility and ordering.
 
-
+The Java Memory Model (JMM) is a specification that defines how threads interact through memory 
+in a multithreaded Java application, providing guarantees about the visibility and ordering of 
+memory operations across different threads. The JMM ensures consistent behavior even in the 
+presence of aggressive compiler optimizations and hardware caches that might otherwise 
+reorder instructions or keep stale data in local memory. 
+The central concept in the JMM is the happens-before relationship, a partial ordering that 
+guarantees that the effects of one action are visible to another. If action A happens-before 
+action B, then the results of A are guaranteed to be visible to the thread performing B. 
+The JMM defines rules that establish this relationship, including program order within a 
+single thread, monitor lock and unlock operations, and interactions involving volatile 
+variables, thread start, and thread join. 
+Below are code examples illustrating JMM concepts. 
+Example 1: The Visibility Problem
+This example demonstrates how a change to a shared variable by one thread might not be visible 
+to another without proper synchronization, potentially leading to issues like infinite loops. 
+For a full code example, please refer to CodeSignal. 
+Explanation: Without proper synchronization, a worker thread might not see changes made to a 
+shared variable by another thread, potentially causing unexpected behavior like an infinite loop. 
+Example 2: Solving Visibility with volatile
+Marking a shared variable as volatile guarantees that writes are flushed to main memory and 
+reads fetch the latest value, establishing a happens-before relationship. For a full code 
+example, please refer to CodeSignal. 
+Explanation: The volatile keyword ensures that changes to the variable are visible across threads. 
+Example 3: Solving Visibility with synchronized
+Synchronization provides both mutual exclusion and happens-before guarantees. An unlock operation 
+by one thread happens-before a subsequent lock by another thread on the same monitor. For a full 
+code example, please refer to CodeSignal. 
+Explanation: Using synchronized methods or blocks ensures that reads and writes to shared 
+variables are properly ordered and visible across threads.
 
 The Java Memory Model (JMM) defines the rules regarding how threads interact with memory. It 
 specifies two crucial things: how and when changes made by one thread become visible to another 
