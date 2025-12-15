@@ -32,3 +32,16 @@ Cleanup Guarantee                Ensures critical cleanup operations—like clos
                                  file streams, database connections, or releasing locks—are 
                                  always performed, even during abrupt termination due to an 
                                  exception.
+
+🗑️ 3. finalize (Garbage Collection Hook - Deprecated)The finalize method (note the lowercase 'f') 
+is a method inherited from java.lang.Object.
+Purpose                      Description
+Pre-Garbage Collection Hook  The JVM calls finalize() on an object just before the Garbage 
+                             Collector (GC) destroys it. It was intended for releasing 
+                             non-Java resources (e.g., native memory allocated via JNI).
+
+Status                       It is deprecated since Java 9 and marked for removal. 
+                             It should never be used.
+
+Issue	                       The JVM offers no guarantee that finalize() will ever run, 
+                             nor does it guarantee when it runs. It drastically slows down GC.
