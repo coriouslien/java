@@ -1,3 +1,7 @@
+An abstract class can contain both abstract and non-abstract methods and non-public members, 
+while an interface primarily defines functionality and has implicitly public members. 
+A class can extend one abstract class but implement multiple interfaces.
+
 The main difference is that an abstract class is used for related classes that share a common 
 base, state, and partial implementation (an "is-a" relationship), while an interface defines a contract for any class to follow, focusing solely on shared behavior without dictating 
 implementation or state (a "can-do" or "has-a" ability). 
