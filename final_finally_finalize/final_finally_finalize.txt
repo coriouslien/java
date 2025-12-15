@@ -1,0 +1,24 @@
+The keywords final, finally, and the method finalize() (now deprecated) serve entirely different 
+purposes related to immutability and control, exception handling cleanup, and garbage collection 
+cleanup, respectively. 
+
+final: Used for constants, preventing method overriding, or preventing class inheritance.
+finally: A block in exception handling that always executes.
+finalize: A garbage collector method, though try-with-resources is generally preferred.
+
+The keywords final, finally, and finalize in Java are often confused due to their similar names, but they serve three completely different and unrelated purposes within the language.
+
+Here is a breakdown of each keyword, their roles, and a complete code example.
+
+🔑 1. final (Modifier for Immutability and Prevention)
+The final keyword is a non-access modifier used to define something that cannot be changed or
+overridden. Its primary purpose is to ensure immutability and prevent unwanted extension or
+modification.
+
+Context       Purpose of final                         Example
+Variable	    Makes the variable a constant.           Its value can only be assigned once.
+Method	      Prevents subclassing from overriding     public final void connect() { ... }
+              the method.
+Class	        Prevents the class from being            public final class String { ... }
+              extended (subclassed). Used to ensure 
+              security and immutability.
