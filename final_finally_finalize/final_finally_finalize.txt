@@ -22,3 +22,13 @@ Method	      Prevents subclassing from overriding     public final void connect(
 Class	        Prevents the class from being            public final class String { ... }
               extended (subclassed). Used to ensure 
               security and immutability.
+
+⚙️ 2. finally (Exception Handling Cleanup)The finally keyword is a block associated with a 
+try-catch structure. Its purpose is to hold code that must be executed, regardless of whether 
+an exception was thrown or caught in the try block.
+
+Purpose                          Description
+Cleanup Guarantee                Ensures critical cleanup operations—like closing 
+                                 file streams, database connections, or releasing locks—are 
+                                 always performed, even during abrupt termination due to an 
+                                 exception.
