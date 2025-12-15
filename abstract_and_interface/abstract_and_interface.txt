@@ -1,0 +1,29 @@
+The difference between an abstract class and an interface is a foundational concept in Java 
+object-oriented programming. Although both are used to achieve abstraction and polymorphism, 
+they serve distinct purposes and have evolved significantly over Java's history (especially since Java 8).Here is a detailed breakdown of their differences, roles, and implementation rules.
+⚖️ Comparison Table
+Feature                  Abstract                      ClassInterface
+Inheritance	             Single Inheritance Only.      Multiple Inheritance Allowed. 
+                         A class can extend only       A class can implement multiple interfaces.
+                         one abstract class.
+Methods	                 Can have abstract (no body)   Until Java 8, methods were all implicitly
+                         and concrete (implemented)    public abstract. Now, they can have
+                         methods.                      default and static methods with bodies,
+                                                       and private methods. 
+Fields/Variables	       Can have any type of          Fields are implicitly public static final
+                         variable: public, private,    (constants) by definition.
+                         protected, static, final.
+Constructor	             Can have constructors.        Cannot have constructors.
+                         They are used by child 
+                         classes via super() for 
+                         initialization.
+State	                   Can define and hold           Cannot hold instance state.
+                         instance state (fields        All fields are constants.
+                         that change per object).
+Evolution                Difficult to evolve;          Easier to evolve since Java 8, as new methods
+                         adding a new abstract         can be added with default implementations.
+                         method breaks all existing 
+                         subclasses.
+Primary Role	           Define a common base for a    Define a contract or capability that unrelated
+                         family of closely related     classes can implement (Can-Do relationship).
+                         classes (Is-A relationship).
