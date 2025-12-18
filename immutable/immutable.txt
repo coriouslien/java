@@ -24,3 +24,12 @@ Initialize all fields via the Constructor: This is the only place where the stat
 
 Perform Defensive Copying: If the class contains references to mutable objects (like a List or 
 a Date), you must copy those objects during construction and when returning them from getter methods.
+
+🌟 Why use Immutable Classes?
+Thread Safety: Since the state never changes, multiple threads can access the object simultaneously
+without any risk of data corruption or race conditions.
+
+Security: They provide a guarantee that sensitive data (like a URL or a password stored in a String) won't be altered unexpectedly.
+
+Caching and Reuse: You can safely cache immutable objects or use them as keys in a HashMap 
+because their hashCode will never change.
