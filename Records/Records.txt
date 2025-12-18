@@ -1,0 +1,22 @@
+Java Records, introduced as a standard feature in Java 16, are a special type of class designed
+specifically to act as "transparent holders for immutable data." They dramatically simplify 
+the creation of immutable classes by eliminating nearly all the boilerplate code.
+
+🚀 How Records Simplify Immutability
+In a traditional immutable class, you have to manually write the fields, constructor, getters, equals(), hashCode(), and toString(). A Record does all of this automatically in a single line of code.
+
+How Records Map to the "5 Rules"
+Records handle most of the immutability requirements by default:
+
+Implicitly final: Records cannot be extended by other classes.
+
+Implicitly private final fields: The components you list in the record header are automatically
+created as private final fields.
+
+No Setters: Records do not generate setters. They only generate "accessor" methods (e.g., id() 
+instead of getId()).
+
+Automatic Constructor: A "Canonical Constructor" is generated that initializes all fields.
+
+Bonus - Identity Methods: equals(), hashCode(), and toString() are automatically implemented based 
+on the data components.
